@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { subscribe } from "../helper/event";
 
-import blurry from "../assets/bg-blurry.svg";
-
 const Messages = () => {
-  const [KIOWriting, setKIOWriting] = useState(true);
+  const [KIOWriting, setKIOWriting] = useState(false);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -30,7 +28,7 @@ const Messages = () => {
           messages.map((message, i) => {
             const styles = {
               user: "self-end ml-[100px] bg-neutral-700",
-              kio: "self-start bg-orange-600 mr-[100px]",
+              kio: "self-start bg-orange-500 mr-[100px]",
             };
 
             const style = styles[message.sender];
