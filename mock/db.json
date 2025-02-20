@@ -1,0 +1,67 @@
+{
+  "assistents": [
+    {
+      "id": 1,
+      "name": "Assistent 1"
+    },
+    {
+      "id": 2,
+      "name": "Assistent 2"
+    }
+  ],
+  "conversations": [
+    {
+      "id": "123-456",
+      "assistantId": 1,
+      "title": "My 1st conversation",
+      "chat": [
+        {
+          "sender": "user",
+          "content": "Hiii ..."
+        },
+        {
+          "sender": "kio",
+          "content": "Hallo, wie kann ich dir helfen?"
+        }
+      ]
+    },
+    {
+      "id": "123-123",
+      "assistantId": 2,
+      "title": "This is the title of the conversation",
+      "chat": [
+        {
+          "sender": "user",
+          "content": "Wie geht es dir?"
+        },
+        {
+          "sender": "kio",
+          "content": "Mir geht es gut. Und dir?"
+        }
+      ]
+    },
+    {
+      "id": "123-321",
+      "assistantId": 2,
+      "title": "Very very very very very very looooooooooooooooooong title",
+      "chat": [
+        {
+          "sender": "user",
+          "content": "Joo"
+        },
+        {
+          "sender": "kio",
+          "content": "Hey ;-)"
+        },
+        {
+          "sender": "user",
+          "content": "Lorem ipsum .... sit amet."
+        },
+        {
+          "sender": "kio",
+          "content": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+        }
+      ]
+    }
+  ]
+}
