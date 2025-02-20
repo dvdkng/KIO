@@ -30,6 +30,9 @@ const Prompt = () => {
     }
     setPrompt("");
     setImage(null);
+    if (imageInputRef.current) {
+      imageInputRef.current.value = null;
+    }
   };
 
   const handleAddImage = () => {
@@ -49,7 +52,9 @@ const Prompt = () => {
 
   const handleRemoveImage = () => {
     setImage(null);
-    imageInputRef.current.value = null; 
+    if (imageInputRef.current) {
+      imageInputRef.current.value = null;
+    }
   };
 
   return (
@@ -102,10 +107,14 @@ const Prompt = () => {
         <div className="flex justify-between items-center">
           <button
             onClick={handleAddImage}
-            className="p-2 bg-neutral-700 rounded-full cursor-pointer"
+            className="group p-2.5 bg-neutral-700 relative rounded-full cursor-pointer flex justify-start items-center overflow-hidden h-9 w-9 duration-100 hover:w-24"
           >
             <FaPaperclip />
+            <span className="absolute left-8  text-neutral-200 opacity-0 transition-opacity duration-200 group-hover:opacity-100 text-nowrap">
+              Add File
+            </span>
           </button>
+
           <input
             ref={imageInputRef}
             id="image-input"
