@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaEllipsis } from "react-icons/fa6";
+import { FaEllipsis, FaPlus } from "react-icons/fa6";
 import logo from "../assets/logo.png";
 import { publish } from "../helper/event";
 
@@ -130,10 +130,14 @@ const SideBar = () => {
       .then((data) => {
         setConversations(data);
         if (data.length > 0) {
-          handleConvClick(data[0])
+          handleConvClick(data[0]);
         }
       })
       .catch((error) => console.error("Cannot load conversations:", error));
+  };
+
+  const handleNewConv = () => {
+    console.log("New conv", activeAssistant);
   };
 
   const handleConvClick = (conversation) => {
@@ -143,9 +147,22 @@ const SideBar = () => {
   };
 
   return (
-    <div className="h-full w-[20%] min-w-[300px] border-2 border-neutral-400 rounded-2xl overflow-y-scroll scrollbar-hide">
-      <div className="px-5 py-5 flex justify-between items-center">
-        <img className="h-4" src={logo} alt="logo" />
+    <div className="h-full w-[20%] min-w-[300px] border-2 border-neutral-400 rounded-2xl overflow-y-scroll scrollbar-hide ">
+      <div className="pl-5 pr-3 py-1 flex justify-between items-center overflow-x-hidden relative">
+        <img className="h-5 my-3" src={logo} alt="logo" />
+
+        {activeAssistant !== null && (
+          <button
+            onClick={handleNewConv}
+            className="group p-[11px] bg-neutral-700 relative rounded-full cursor-pointer flex justify-end items-center overflow-hidden h-9 w-9 duration-100 hover:w-40"
+          >
+            <span className="absolute right-8  text-neutral-200 opacity-0 transition-opacity duration-200 group-hover:opacity-100 text-nowrap">
+              New Conversation
+            </span>
+
+            <FaPlus />
+          </button>
+        )}
       </div>
 
       <div className="w-full h-0.5 bg-neutral-400" />

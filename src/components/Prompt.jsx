@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const Prompt = () => {
   const [prompt, setPrompt] = useState("");
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
   const textareaRef = useRef(null);
   const imageInputRef = useRef(null);
 
@@ -25,11 +25,11 @@ const Prompt = () => {
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
     console.log("prompt: ", prompt);
-    if (image) {
-      console.log("image: ", image);
+    if (images.length > 0) {
+      console.log("images: ", images);
     }
     setPrompt("");
-    setImage(null);
+    setImages([]);
     if (imageInputRef.current) {
       imageInputRef.current.value = null;
     }
@@ -40,42 +40,47 @@ const Prompt = () => {
   };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+    const files = Array.from(e.target.files);
+    const newImages = files.map((file) => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+      });
+    });
+    Promise.all(newImages).then((results) => {
+      setImages((prevImages) => [...prevImages, ...results]);
+    });
   };
 
-  const handleRemoveImage = () => {
-    setImage(null);
-    if (imageInputRef.current) {
-      imageInputRef.current.value = null;
-    }
+  const handleRemoveImage = (index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
   return (
     <>
       <div className="bg-linear-0 from-neutral-800 to-transparent w-full h-30 absolute bottom-0 pointer-events-none" />
       <div className="absolute w-full bottom-0 bg-neutral-800 rounded-2xl border-2 border-neutral-400 p-3 flex flex-col gap-2">
-        {image && (
-          <div className="relative w-12 h-12 overflow-hidden rounded-md bg-neutral-700 group">
-            <img
-              src={image}
-              alt="Image Preview"
-              className="w-full h-full object-contain"
-            />
-            <button
-              onClick={handleRemoveImage}
-              className="absolute top-0.5 right-0.5 bg-neutral-800 rounded-full p-1 cursor-pointer group-hover:opacity-100 opacity-0 duration-100"
+        <div className="flex gap-2">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className="relative w-12 h-12 overflow-hidden rounded-md bg-neutral-700 group"
             >
-              <FaRegTrashCan size={8} />
-            </button>
-          </div>
-        )}
+              <img
+                src={image}
+                alt="Preview"
+                className="w-full h-full object-contain"
+              />
+              <button
+                onClick={() => handleRemoveImage(index)}
+                className="absolute top-0.5 right-0.5 bg-neutral-800 rounded-full p-1 cursor-pointer group-hover:opacity-100 opacity-0 duration-100"
+              >
+                <FaRegTrashCan size={8} />
+              </button>
+            </div>
+          ))}
+        </div>
 
         <form onSubmit={handleSubmit} className="flex w-full">
           <textarea
@@ -110,16 +115,16 @@ const Prompt = () => {
             className="group p-2.5 bg-neutral-700 relative rounded-full cursor-pointer flex justify-start items-center overflow-hidden h-9 w-9 duration-100 hover:w-24"
           >
             <FaPaperclip />
-            <span className="absolute left-8  text-neutral-200 opacity-0 transition-opacity duration-200 group-hover:opacity-100 text-nowrap">
-              Add File
+            <span className="absolute left-8 text-neutral-200 opacity-0 transition-opacity duration-200 group-hover:opacity-100 text-nowrap">
+              Add Files
             </span>
           </button>
-
           <input
             ref={imageInputRef}
             id="image-input"
             type="file"
             accept="image/*"
+            multiple
             onChange={handleImageChange}
             style={{ display: "none" }}
           />

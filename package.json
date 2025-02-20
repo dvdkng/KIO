@@ -24,9 +24,9 @@
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.19.0",
+    "eslint": "^9.20.1",
     "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
     "json-server": "^1.0.0-beta.3",
@@ -36,5 +36,8 @@
   },
   "rules": {
     "react/props-types": "off"
+  },
+  "eslintConfig": {
+    "extends": "plugin:react-hooks/recommended"
   }
 }
