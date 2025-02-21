@@ -5,7 +5,7 @@ import Massages from "./Massages";
 
 const Chat = () => {
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full h-full flex justify-center">
       <div className="max-w-[900px] h-full w-full flex flex-col relative">
         <Massages />
         <Prompt />

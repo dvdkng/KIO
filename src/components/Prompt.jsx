@@ -58,92 +58,89 @@ const Prompt = () => {
   };
 
   return (
-    <>
-      <div className="bg-linear-0 from-neutral-800 to-transparent w-full h-30 absolute bottom-0 pointer-events-none" />
-      <div className="absolute w-full bottom-0 bg-neutral-800 rounded-2xl border-2 border-neutral-400 p-3 flex flex-col gap-2">
-        <div className="flex gap-2">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className="relative w-12 h-12 overflow-hidden rounded-md bg-neutral-700 group"
-            >
-              <img
-                src={image}
-                alt="Preview"
-                className="w-full h-full object-contain"
-              />
-              <button
-                onClick={() => handleRemoveImage(index)}
-                className="absolute top-0.5 right-0.5 bg-neutral-800 rounded-full p-1 cursor-pointer group-hover:opacity-100 opacity-0 duration-100"
-              >
-                <FaRegTrashCan size={8} />
-              </button>
-            </div>
-          ))}
-        </div>
-
-        <form onSubmit={handleSubmit} className="flex w-full">
-          <textarea
-            rows={1}
-            onKeyDown={handleKeyDown}
-            ref={textareaRef}
-            placeholder="send a message to KIO ..."
-            value={prompt}
-            onInput={(e) => setPrompt(e.target.value)}
-            className="pr-3 py-1.5 outline-none w-full placeholder:text-neutral-400 resize-none"
-            type="text"
-          />
-          <AnimatePresence>
-            {prompt.length > 0 && (
-              <motion.button
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.3 }}
-                type="submit"
-                className="bg-orange-500 p-2 rounded-full h-full cursor-pointer"
-              >
-                <FaAngleRight />
-              </motion.button>
-            )}
-          </AnimatePresence>
-        </form>
-
-        <div className="flex justify-between items-center">
-          <button
-            onClick={handleAddImage}
-            className="group p-2.5 bg-neutral-700 relative rounded-full cursor-pointer flex justify-start items-center overflow-hidden h-9 w-9 duration-100 hover:w-24"
+    <div className="w-full bg-neutral-800 rounded-2xl border-2 border-neutral-400 p-3 flex flex-col gap-2">
+      <div className="flex gap-2">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className="relative w-12 h-12 rounded-md bg-neutral-700 group"
           >
-            <FaPaperclip />
-            <span className="absolute left-8 text-neutral-200 opacity-0 transition-opacity duration-200 group-hover:opacity-100 text-nowrap">
-              Add Files
-            </span>
-          </button>
-          <input
-            ref={imageInputRef}
-            id="image-input"
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleImageChange}
-            style={{ display: "none" }}
-          />
-          <AnimatePresence>
-            {prompt.length > 0 && (
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="font-mono text-neutral-400"
-              >
-                <Key>Shift</Key> + <Key>Enter</Key> to submit
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </div>
+            <img
+              src={image}
+              alt="Preview"
+              className="w-full h-full object-contain overflow-hidden rounded"
+            />
+            <button
+              onClick={() => handleRemoveImage(index)}
+              className="absolute -top-2 -right-2 bg-neutral-700 border-4 border-neutral-800 rounded-full p-1 cursor-pointer duration-100"
+            >
+              <FaRegTrashCan size={10} />
+            </button>
+          </div>
+        ))}
       </div>
-    </>
+
+      <form onSubmit={handleSubmit} className="flex items-end w-full">
+        <textarea
+          rows={1}
+          onKeyDown={handleKeyDown}
+          ref={textareaRef}
+          placeholder="send a message to KIO ..."
+          value={prompt}
+          onInput={(e) => setPrompt(e.target.value)}
+          className="pr-3 py-1.5 outline-none w-full placeholder:text-neutral-400 resize-none"
+          type="text"
+        />
+        <AnimatePresence>
+          {prompt.length > 0 && (
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.3 }}
+              type="submit"
+              className="bg-orange-500 p-2 rounded-full  cursor-pointer"
+            >
+              <FaAngleRight />
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </form>
+
+      <div className="flex justify-between items-center">
+        <button
+          onClick={handleAddImage}
+          className="group p-2.5 bg-neutral-700 relative rounded-full cursor-pointer flex justify-start items-center overflow-hidden h-9 w-9 duration-100 hover:w-24"
+        >
+          <FaPaperclip />
+          <span className="absolute left-8 text-neutral-200 opacity-0 transition-opacity duration-200 group-hover:opacity-100 text-nowrap">
+            Add Files
+          </span>
+        </button>
+        <input
+          ref={imageInputRef}
+          id="image-input"
+          type="file"
+          accept="image/*"
+          multiple
+          onChange={handleImageChange}
+          style={{ display: "none" }}
+        />
+        <AnimatePresence>
+          {prompt.length > 0 && (
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="font-mono text-neutral-400"
+            >
+              <Key>Shift</Key> + <Key>Enter</Key> to submit
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
   );
 };
 

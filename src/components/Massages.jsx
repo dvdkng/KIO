@@ -20,9 +20,7 @@ const Messages = () => {
   }, []);
 
   return (
-    <div className="h-full overflow-y-scroll scrollbar-hide flex flex-col gap-5 w-full relative pb-20">
-      {/* <img src={blurry} alt="" className="pointer-events-none fixed w-[50%] top-[-5vw] right-0" /> */}
-
+    <div className="overflow-y-scroll scrollbar-hide flex flex-col gap-5 relative flex-auto">
       <AnimatePresence mode="wait">
         {messages.length > 0 ? (
           messages.map((message, i) => {
@@ -34,14 +32,7 @@ const Messages = () => {
             const style = styles[message.sender];
 
             return (
-              <motion.div
-                key={i}
-                className={`py-3 px-5 rounded-2xl ${style}`}
-                // initial={{ opacity: 0 }}
-                // animate={{ opacity: 1 }}
-                // transition={{ duration: 0.2, delay: i * 0.2 }}
-                // style={{ overflow: "hidden" }}
-              >
+              <motion.div key={i} className={`py-3 px-5 rounded-2xl ${style}`}>
                 <p>{message.content}</p>
               </motion.div>
             );
