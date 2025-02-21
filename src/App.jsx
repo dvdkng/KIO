@@ -5,10 +5,8 @@ import Chat from "./components/Chat";
 import Header from "./components/Header";
 
 const App = () => {
-  console.log("....")
-  
   return (
-    <div className="flex flex-col relative w-full h-screen bg-neutral-800 *:text-white *:text-sm">
+    <div className="flex flex-col relative w-full h-[100dvh] bg-neutral-800 *:text-white *:text-sm">
       <Header />
       <div className="md:p-10 p-5 h-full md:flex md:gap-5">
         <SideBar />
